@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Le Grenier de Léon</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%# <link rel="shortcut icon" type="image/png" href="ladder.png"/> %>
+    <%= favicon_link_tag 'favicon.ico' %>
+
+
+  <!-- Include daterangepicker CSS -->
+    <link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />
+    <link rel="stylesheet" href="../node_modules/daterangepicker/daterangepicker.css">
+    <!-- Include jQuery and moment.js (dependencies for daterangepicker) -->
+    <script type="text/javascript" src="//cdn.jsdelivr.net/jquery/1/jquery.min.js"></script>
+    <script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+    <%= javascript_include_tag "delete_confirmation_dialog" %>
+
+  <!-- Include daterangepicker JavaScript -->
+  <script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+  <%= javascript_importmap_tags %>
+  <!--  Include Bootstrap Datepicker CSS
+  <%= stylesheet_link_tag 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css' %>
+  Include Bootstrap Datepicker JS
+  <%= javascript_include_tag 'https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js' %>
+  -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+  </head>
+
+  <body>
+    <%= render "shared/navbar" %>
+    <%= render "shared/flashes" %>
+    <%= yield %>
+    <div class="footer">
+
+      <div class="footer-copyright">
+        © Team SlimSpirit 2024
+      </div>
+</div>
+
+
+  </body>
+
+
+
+</html>

@@ -1,0 +1,43 @@
+.navbar-brand h1 {
+  font-size: 24px;
+  margin-bottom: 0;
+}
+
+.navbar-brand h3 {
+  font-size: 16px;
+  color: #7f7f7f;
+  margin-top: 0;
+  text-align: end;
+}
+
+.navbar-lewagon {
+  justify-content: space-between;
+  background: white;
+}
+
+.navbar-lewagon .navbar-collapse {
+  flex-grow: 0;
+}
+
+.navbar-lewagon .navbar-brand img {
+  width: 40px;
+}
+
+.btn-navbar {
+  padding: 4px 24px;
+  border-radius: 4px;
+  font-weight: lighter;
+  font-size: 16px;
+  transition: opacity 0.3s ease;
+  margin: 15px;
+  color: white;
+  border: 1px solid white;
+  background-color: #f18940;
+}
+
+
+.btn-navbar:hover {
+  color: #f18940;
+  background-color: white;
+  border: 1px solid #f18940;
+}

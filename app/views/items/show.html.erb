@@ -1,0 +1,96 @@
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-8">
+      <% if @item.photo.key %>
+        <%= cl_image_tag @item.photo.key, class:"img-show" %>
+      <% else %>
+        <img src="<%= @item.picture %>" class="img-show" alt="<%= @item.name %>">
+      <% end %>
+    </div>
+    <div class="col-4">
+      <!-- <h2><%= @item.category.upcase %></h2> -->
+      <div class="tag"><%= @item.category.upcase %></div>
+      <h1><%= @item.name.capitalize %></h1>
+
+<%# View owner %>
+    <% if current_user == @item.user %>
+      <p><%= @item.description %></p>
+      <br><br>
+      <%= link_to edit_item_path(@item) do %><i class="fa-solid fa-pen"></i> Modifier <% end %><br>
+
+      <%= link_to item_path(@item),
+          data: {turbo_method: :delete,
+          turbo_confirm: "Je confirme la suppression"} do %>
+          <i class="fa-solid fa-trash"></i> Supprimer l'objet
+          <% end %>
+
+    <% else %>
+<%# View user %>
+      <h4>Appartient à <%= @item.user.name %></h4>
+      <h4><i class="fa-solid fa-location-dot" style="color: #f18940;"></i> <%= @item.user.address %></h4>
+      <p><%= @item.description %></p>
+
+      <%= simple_form_for [@item, @booking] do |f| %>
+        <%= f.input :status, as: :hidden, input_html: { value: "pending" } %>
+        <%= f.input :start_date,
+            label: "Date de début",
+            as: :string,
+            input_html: { data: { controller: "datepicker" } } %>
+        <%= f.input :end_date,
+            label: "Date de fin",
+            as: :string,
+            input_html: { data: { controller: "datepicker" } } %>
+        <!-- <%= f.hidden_field :start_date%>
+        <%= f.hidden_field :end_date%> -->
+
+        <!-- <div class="input-group">
+          <%# Refers to documentation => date_range id + date_range name to use in the controller_date_picker %>
+          <input type="text" id="date_range" name="date_range" class="js-daterangepicker form-control daterangepicker-custom-input">
+        </div>
+
+        <%# Initialize start_date and end_date from @bookings %>
+        <input type="hidden" id="start_date" name="start_date">
+        <input type="hidden" id="end_date" name="end_date"> -->
+
+      <%= f.submit "Envoyer ma demande", class: "btn btn-blue" %>
+      <% end %>
+
+
+      <!--<%= simple_form_for [@item, @booking] do |f| %>
+        <%= f.input :status, as: :hidden, input_html: { value: "pending" } %>
+        <div class="input-group">
+          <input type="text" id="date_range" name="date_range" class="js-daterangepicker form-control daterangepicker-custom-input">
+        </div>
+        <input type="hidden" id="start_date" name="start_date">
+        <input type="hidden" id="end_date" name="end_date">
+      <%= f.submit "Envoyer ma demande", class: "btn btn-blue" %>
+      <% end %> -->
+
+
+<%# Script refers to Date Range Picker %>
+<%# 1. Fetch the input and parameters %>
+<%# 2. Initialize the Date Range Picker %>
+<%# 3. Set the start_date and end_date values %>
+<%# 4. Submit the form %>
+
+<!-- <script type="text/javascript">
+  $(function() {
+    const today = moment().startOf('day');
+    $('input[name="date_range"]').daterangepicker({
+      autoApply: true,
+      opens: 'left',
+      minDate: today
+    }, function(start, end, label) {
+      console.log("A new date range selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+      // Optionally, set these values in hidden fields to submit with the form
+      $('#start_date').val(start.format('YYYY-MM-DD'));
+      $('#end_date').val(end.format('YYYY-MM-DD'));
+    });
+  });
+</script>-->
+    <% end %>
+
+    </div>
+    <%= link_to "Retour", :back %>
+  </div>
+</div>

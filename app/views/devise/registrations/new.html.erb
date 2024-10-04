@@ -1,0 +1,47 @@
+<div class="container mt-3">
+  <h2>M'inscire</h2>
+
+  <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input :email,
+                  required: true,
+                  autofocus: true,
+                  input_html: { autocomplete: "email" }%>
+      <%= f.input :name,
+                  required: false,
+                  input_html: { autocomplete: "name" },
+                  label: "Nom" %>
+      <%= f.input :address,
+                  required: false,
+                  input_html: {data: {address_autocomplete_target: "address"}},
+                  wrapper_html: {data: {controller: "address-autocomplete", address_autocomplete_api_key_value: ENV["MAPBOX_API_KEY"]}},
+                  label: "Adresse" %>
+
+      <%= f.input :phone,
+                  required: false,
+                  input_html: { autocomplete: "phone" },
+                  label: "Téléphone" %>
+      <%= f.input :avatar,
+                  required: false,
+                  input_html: { autocomplete: "avatar" },
+                  label: "Photo de profil" %>
+      <%= f.input :password,
+                  required: true,
+                  hint: ("#{@minimum_password_length} caractères minimum" if @minimum_password_length),
+                  input_html: { autocomplete: "new-password" },
+                  label: "Mot de passe"  %>
+      <%= f.input :password_confirmation,
+                  required: true,
+                  input_html: { autocomplete: "new-password" },
+                  label: "Confirmez votre mot de passe"  %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit, "Je m'inscris", class:"btn btn-blue" %>
+    </div>
+  <% end %>
+
+  <%= render "devise/shared/links" %>
+</div>
