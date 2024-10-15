@@ -3,7 +3,21 @@ class ItemsController < ApplicationController
   skip_before_action :authenticate_user!, only: %i[index show]
 
   def index
-    @items = Item.where.not(user: current_user)
+    @mygroups = current_user.groups.to_a
+    @myfriends = []
+
+    @mygroups.each do |mygroup|
+      @mygroup_users = mygroup.users
+      @mygroup_users.each do |mygroup_users|
+        @myfriends << mygroup_users
+      end
+    end
+
+    @myfriends = @myfriends.uniq
+
+    @mygroupsitems = Item.where(user: @myfriends)
+    @items =  @mygroupsitems.where.not(user: current_user)
+
 
     if params[:location].present?
       @owners = User.near(params[:location], 30, order: :distance)

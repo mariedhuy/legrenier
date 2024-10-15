@@ -76,12 +76,16 @@ puts "new groups"
 
 voisins = Group.create(name:"Voisins de Léon", user_id: marie.id, public: true)
 campeurs = Group.create(name:"Fans de camping Barcelone", user_id: audrey.id, public: true)
+rando = Group.create(name:"Rando Paris", user_id: kevin.id, public: true)
+
 
 puts "new members"
 
-Membership.create(user_id: marie, group_id: voisins)
-Membership.create(user_id: kevin, group_id: voisins)
-Membership.create(user_id: audrey, group_id: campeurs)
-Membership.create(user_id: valentin, group_id: campeurs)
+Membership.create(user_id: marie.id, group_id: voisins.id)
+Membership.create(user_id: kevin.id, group_id: voisins.id)
+Membership.create(user_id: audrey.id, group_id: campeurs.id)
+Membership.create(user_id: valentin.id, group_id: campeurs.id)
+Membership.create(user_id: audrey.id, group_id: rando.id)
+
 
 puts "done"

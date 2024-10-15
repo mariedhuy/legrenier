@@ -1,5 +1,16 @@
 <div data-controller="filter" class="container">
   <div class="row">
+
+    <div>
+      <h1>Mes groupes</h1>
+      <% @mygroups.each do |group| %>
+       <p class="tag">
+       <%= group.name %>
+       </p>
+      <% end %>
+    </div>
+
+
     <div>
       <%= render "items/search_form" %>
         <div class="container mt-3">
