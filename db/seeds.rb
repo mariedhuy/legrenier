@@ -1,5 +1,6 @@
 puts "clean"
 
+Group.destroy_all
 Item.destroy_all
 User.destroy_all
 
@@ -70,5 +71,17 @@ radiateur = Item.create(name: "Radiateur Soleil", picture:"https://static.lceass
 
 dehumidificateur = Item.create(name: "Déshumidificateur Sahara", picture:"https://www.pylones.com/58201-large_default/cadeau-design-eventail-lho.jpg", category: "Électroménager", description: "Pour un intérieur sec et confortable. Ce déshumidificateur est si efficace qu'il pourrait même assécher une piscine (ou presque).", user_id: audrey.id)
 
+
+puts "new groups"
+
+voisins = Group.create(name:"Voisins de Léon", user_id: marie.id, public: true)
+campeurs = Group.create(name:"Fans de camping Barcelone", user_id: audrey.id, public: true)
+
+puts "new members"
+
+Membership.create(user_id: marie, group_id: voisins)
+Membership.create(user_id: kevin, group_id: voisins)
+Membership.create(user_id: audrey, group_id: campeurs)
+Membership.create(user_id: valentin, group_id: campeurs)
 
 puts "done"
