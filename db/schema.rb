@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_06_24_105441) do
+ActiveRecord::Schema[7.1].define(version: 2024_10_15_141229) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -54,6 +54,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_105441) do
     t.index ["user_id"], name: "index_bookings_on_user_id"
   end
 
+  create_table "groups", force: :cascade do |t|
+    t.string "name"
+    t.boolean "public"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_groups_on_user_id"
+  end
+
   create_table "items", force: :cascade do |t|
     t.string "name"
     t.string "category"
@@ -62,7 +71,17 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_105441) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id", null: false
+    t.boolean "available"
     t.index ["user_id"], name: "index_items_on_user_id"
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "group_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_memberships_on_group_id"
+    t.index ["user_id"], name: "index_memberships_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -87,5 +106,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_06_24_105441) do
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
   add_foreign_key "bookings", "items"
   add_foreign_key "bookings", "users"
+  add_foreign_key "groups", "users"
   add_foreign_key "items", "users"
+  add_foreign_key "memberships", "groups"
+  add_foreign_key "memberships", "users"
 end
